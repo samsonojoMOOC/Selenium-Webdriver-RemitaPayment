@@ -1,0 +1,16 @@
+[0.001][INFO]:      ChromeDriver 26.0.1383.0 C:\Users\USER\Documents\Remita_JUnit_DataDriven_Framework\src\config\chromedriver.exe
+[1.043][FINE]:      Initializing session with capabilities {
+   "browserName": "chrome",
+   "chrome.switches": [  ],
+   "chromeOptions": {
+      "args": [  ],
+      "extensions": [  ]
+   },
+   "platform": "ANY",
+   "version": ""
+}
+
+[1.063][INFO]:      Launching chrome: "C:\Program Files (x86)\Google\Chrome\Application\chrome.exe" --disable-hang-monitor --disable-prompt-on-repost --dom-automation --full-memory-crash-report --no-default-browser-check --no-first-run --disable-background-networking --disable-sync --disable-translate --disable-web-resources --safebrowsing-disable-auto-update --safebrowsing-disable-download-protection --disable-client-side-phishing-detection --disable-component-update --disable-default-apps --enable-logging --log-level=1 --ignore-certificate-errors about:blank
+[31.118][SEVERE]:   Failed to initialize connection
+[41.244][WARNING]:  Chrome still running, terminating...
+[41.244][INFO]:     Chrome shutdown
