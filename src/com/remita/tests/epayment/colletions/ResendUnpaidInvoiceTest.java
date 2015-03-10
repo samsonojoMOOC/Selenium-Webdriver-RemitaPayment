@@ -6,23 +6,25 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.concurrent.TimeUnit;
 
+
+
+
+import org.apache.log4j.Logger;
+import org.junit.After;
 //import junit.framework.Assert;
 import org.junit.Assert;
-
-
 import org.junit.Assume;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
-import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.Select;
-import org.openqa.selenium.support.ui.WebDriverWait;
+import org.openqa.selenium.support.ui.FluentWait;
 
 import tests.TestBase;
 import Util.TestUtility;
@@ -34,13 +36,11 @@ import Util.TestUtility;
 
 	public class ResendUnpaidInvoiceTest extends TestBase {
 		// 2nd Step to parameterization
-		
+		Logger ApplicationLogs = Logger.getLogger("devpinoyLogger");
 		//ePayment details here
 			
 			
-			//public String serviceType;
-			//public String dateFrom;
-			//public String dateTo;
+
 			public String RRR;
 			public String positiveData;
 				
@@ -53,28 +53,36 @@ import Util.TestUtility;
 		
 		@Before
 		public void beforeTest() throws IOException{
-			System.out.println("Initializing the ResendUnpaidInvoice Test");
-			initialize();
 			
+			initialize();
+			ApplicationLogs.debug("Initializing the ResendUnpaidInvoice Test");
 			// xlsx file
 			if(TestUtility.isSkip("ResendUnpaidInvoiceViaRRR"))
 				Assume.assumeTrue(false);
 		}
+		@After
+		  public void tearDown() throws Exception {
+		    try {
+		      driver.switchTo().defaultContent();
+		    } catch (Exception e) {
+		      e.getMessage();
+		    }
+		  }
 		
 		@SuppressWarnings("deprecation")
 		@Test
-		public void sendOutInvoicesTest() throws IOException{
+		public void resendOutInvoicesTest() throws IOException{
 			
 								
 			Actions act = new Actions(driver);
 			driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 			WebElement menuPayment = driver.findElement(By.xpath("//*[@id='mainmenu']/li[4]/a"));
 			act.moveToElement(menuPayment).click().build().perform();
-			
+			ApplicationLogs.debug("Resend Unpaid Invoice Module: Moved to the Main Menu");
 			
 			WebElement submenuPayment = driver.findElement(By.xpath("//a[text()='Send Reminders - Unpaid Invoices']"));
 			act.moveToElement(submenuPayment).click().perform();
-			
+			ApplicationLogs.debug("Resend Unpaid Invoice Module: Clicked the Send Reminders Menu");
 			
 			int size = driver.findElements(By.tagName("iframe")).size();
 			System.out.println("Total frames in page- "+size);
@@ -83,34 +91,27 @@ import Util.TestUtility;
 			int allElement = driver.findElements(By.tagName("input")).size();
 			System.out.println("Total input in page - "+ allElement);
 			
-					
-				
-			/*
-			getObjectByXpath("txt_ServiceType").sendKeys(serviceType);	
-			getObjectById("txt_StartDate").sendKeys(dateFrom);
-			getObjectById("txt_EndDate").sendKeys(dateTo);
-			*/
-			getObjectById("txt_RRR").sendKeys(RRR);
+			
+			getObjectById("txt_RRRRend").sendKeys(RRR);
+			ApplicationLogs.debug("Resend Unpaid Invoice Module: Inserted Service RRR");
 			getObjectById("btn_Search").click();
+			ApplicationLogs.debug("Resend Unpaid Invoice Module: Clicked the Search button");
 			
 			//Wait a while for the WebTable to be visible
 			
 			getObjectByXpath("chk_Transaction").click();
-			
+			ApplicationLogs.debug("Resend Unpaid Invoice Module: Clicked the Check box for the transaction");
 			getObjectById("btn_SendUpdaidEmail").click();
-			
-		/*
-			String bodyText = driver.findElement(By.tagName("body")).getText();
-			Assert.assertTrue("Text not found!", bodyText.contains(text));
-			*/
+			ApplicationLogs.debug("Resend Unpaid Invoice Module: Clicked the Send Unpaid Email button");
+		
 			String actualText = driver.findElement(By.xpath("html/body/div[2]")).getText();
 			System.out.println(actualText);
 			
 			String expectedText = "Notification Sent Successfully";
 			//Assert.assertEquals(expectedText, actualText);
-			Assert.assertEquals("Send Out Invoice was unsuccessful", expectedText, actualText);
-			//Assert.assertTrue("Send Out Invoice was unsuccessful", expectedText = actualText);
-			
+			Assert.assertEquals("Resend Email Notification was unsuccessful", expectedText, actualText);
+			//Assert.assertTrue("ReSend Email Notification was unsuccessful", expectedText = actualText);
+			ApplicationLogs.debug("Resend Unpaid Invoice Module: We validated that Email Notification was sent successfully");
 			driver.switchTo().defaultContent();
 			  
 			if(positiveData.equals("Y")){

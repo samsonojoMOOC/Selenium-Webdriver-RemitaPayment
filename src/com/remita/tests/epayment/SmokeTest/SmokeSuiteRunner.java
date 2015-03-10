@@ -8,21 +8,52 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
+
+
+
+
+
 import com.remita.tests.epayment.LoginApprovalTest;
+import com.remita.tests.epayment.LoginBankApprovalTest;
+import com.remita.tests.epayment.LoginBankTest;
+import com.remita.tests.epayment.LoginTest;
 import com.remita.tests.epayment.LogoutTest;
 import com.remita.tests.epayment.PayVendorApprovalTest;
+import com.remita.tests.epayment.colletions.DefineCollectionRuleTest;
+import com.remita.tests.epayment.colletions.EditCollectionRuleTest;
+import com.remita.tests.epayment.colletions.ResendUnpaidInvoiceTest;
+import com.remita.tests.epayment.colletions.SendOutInvoiceUploadTest;
+import com.remita.tests.epayment.colletions.SendOutInvoicesTest;
 
 
 
 @RunWith(Suite.class)
 @SuiteClasses({
 
-LoginApprovalTest.class,
-PayVendorApprovalTest.class,
-LogoutTest.class
+//LoginBankTest.class,
+//BankBranchSetupTest.class,
+
+LoginBankApprovalTest.class,
+BankBranchSetupApprovalTest.class,
+/*
+LoginBankTest.class,
+BankBranchSetupTest.class,
+
+PayPensionTest.class,
+PayContractorUploadTest.class,
+	LoginBankApprovalTest.class,
+	ReverseWrongTransApprovalTest.class,
+	LoginBankTest.class,
+	ReverseWrongTransactionTest.class,
+*/
+	
 
 /*
-LoginTest.class,
+DefineCollectionRuleTest.class,
+EditCollectionRuleTest.class,
+SendOutInvoicesTest.class,
+SendOutInvoiceUploadTest.class,
+ResendUnpaidInvoiceTest.class,
 PayVendorEcheckTest.class,
 PayVendorSwift103Test.class,
 PayRegisteredBillerTest.class,
@@ -33,8 +64,9 @@ UploadSalariesPensionTest.class,
 //UploadSalariesTaxTest.class, KIV - not worked today
 //PayPensionTest.class,
 PayTaxesTest.class,
-LogoutTest.class
 */
+LogoutTest.class
+
 })
 
 public class SmokeSuiteRunner {

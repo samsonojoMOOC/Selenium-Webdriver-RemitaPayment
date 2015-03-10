@@ -8,7 +8,7 @@
     <property environment="env"/>
     
     <property name="ws.home" value="${basedir}"/>
-	<property name="ws.jars" value="C:\Users\USER\Documents\Remita_JUnit_DataDriven_Framework\lib"/>
+	<property name="ws.jars" value="${user.home}/.m2/repository/"/>
     <property name="test.dest" value="${ws.home}/build"/>
     <property name="test.src" value="${ws.home}/src"/>
 	<property name="test.reportsDir" value="C:/remita_reports"/>
@@ -33,7 +33,7 @@
 
     <target name="setClassPath" unless="test.classpath">
         <path id="classpath_jars">
-            <fileset dir="${ws.jars}" includes="*.jar"/>
+            <fileset dir="${ws.jars}" includes="**/*.jar"/>
         </path>
         <pathconvert pathsep=":" 
             property="test.classpath" 
@@ -96,8 +96,8 @@
         </echo>
     </target>
 
-	<path id="test.c">
-	        <fileset dir="${ws.jars}" includes="*.jar"/>
+	<path id="test.run">
+	        <fileset dir="${ws.jars}" includes="**/*.jar"/>
 	</path>
 	
 	  
@@ -108,7 +108,7 @@
 				</delete>
 			    <java jar="${ws.jars}" fork="true" spawn="true" />  
 			    <junit fork="yes" haltonfailure="no" printsummary="yes">
-				    <classpath refid="testcase.path" />  
+				    <classpath refid="test.run" />  
 
 			      <!--  <classpath ="${test.classpath}"/> -->  
 			    <batchtest  todir="${test.reportsDir}" fork="true">  
@@ -117,7 +117,7 @@
 			  <!--include name="tests/LoginTest.class" />
 			 <include name="tests/Parameterized_Test.class" />
 			 <include name="tests/TestApplication.class" /-->
-			  <include name="com.remita.tests.epayment/RemitaSuiteRunner.class" />
+			  <include name="com.remita.tests.epayment.SmokeTest/SmokeSuiteRunner.class" />
 			  
 
 			        

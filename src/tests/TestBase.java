@@ -3,9 +3,11 @@ package tests;
 import java.io.FileInputStream;
 //import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.List;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
+import org.bouncycastle.asn1.ocsp.Request;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoAlertPresentException;
@@ -67,7 +69,7 @@ public class TestBase {
 				cap.setCapability(CapabilityType.PROXY, proxy);				
 				dr = new FirefoxDriver(cap);
 			}else if(CONFIG.getProperty("browser").equals("IE")){
-				System.setProperty("webdriver.ie.driver", "C://Users//USER//Downloads//IEDriverServer_x64_2.39.0//IEDriverServer.exe");
+				System.setProperty("webdriver.ie.driver", "C://Users//USER//Downloads//IEDriverServer.exe");
 				dr = new InternetExplorerDriver();
 			}else if(CONFIG.getProperty("browser").equals("Chrome")){
 				System.setProperty("webdriver.chrome.driver", "src\\config\\chromedriver.exe");
@@ -158,6 +160,17 @@ public class TestBase {
 		return null;
 		}
 	}
+	
+	public static List<WebElement> getObjectsByName(String nameKey){
+		try{
+			return driver.findElements(By.name(OR.getProperty(nameKey)));
+			
+		}catch (Throwable t){
+			TestUtility.takeScreenShot(nameKey);
+			Assert.assertTrue(t.getMessage(), false);
+			return null;
+		}
+	}
 		
 	
 	public static WebElement getObjectByLinkText(String linkTextKey){
@@ -217,5 +230,5 @@ public class TestBase {
 	     return true;
 	    }
 	}
-
+	
 }
