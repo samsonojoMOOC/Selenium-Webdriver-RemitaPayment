@@ -41,9 +41,9 @@ public class ReverseWrongTransApprovalTest extends TestBase{
 		//Click transaction details
 		getObjectByXpath("lnk_transDetail").click();
 		
-		getObjectByName("chk_Reversal_ChkBox").click();
+		//getObjectByName("chk_Reversal_ChkBox").click();
 		
-		getObjectByName("txt_Reversal_Comment").sendKeys("Seen. Its Ok");
+		//getObjectByName("txt_Reversal_Comment").sendKeys("Seen. Its Ok");
 		
 		getObjectByName("btn_Reversal_Submit").click();
 		

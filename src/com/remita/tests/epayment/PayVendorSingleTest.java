@@ -135,9 +135,6 @@ import Util.TestUtility;
 			getObjectById("txt_BeneficiaryAcctNo").sendKeys(beneficiaryAcctNo);
 			getObjectById("txt_Email").sendKeys(email);
 			getObjectById("txt_Phone").sendKeys(phone);
-			//driver.findElement(By.id("amount")).sendKeys(amount2Pay);
-			//driver.findElement(By.id("confirmAmount")).sendKeys(confirmAmount2Pay);
-			//driver.findElement(By.id("narration")).sendKeys(descOfPayment);
 			
 			getObjectById("txt_Amount2Pay").sendKeys(amount2Pay);
 			//getObjectById("txt_ConfirmAmount2Pay").sendKeys(confirmAmount2Pay);

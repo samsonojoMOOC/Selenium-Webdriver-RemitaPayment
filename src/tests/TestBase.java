@@ -17,6 +17,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxProfile;
+import org.openqa.selenium.firefox.internal.ProfilesIni;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.CapabilityType;
@@ -63,11 +65,27 @@ public class TestBase {
 		
 			if (CONFIG.getProperty("browser").equals("Firefox")){
 				Proxy proxy = new Proxy();
-				proxy.setProxyAutoconfigUrl("192.9.200.10:3128");				
+				//proxy.setProxyAutoconfigUrl("https://192.9.200.10:3128/");				
 				DesiredCapabilities cap = new DesiredCapabilities();
 				cap.setCapability(CapabilityType.BROWSER_NAME,	"firefox");
-				cap.setCapability(CapabilityType.PROXY, proxy);				
+				cap.setCapability(CapabilityType.PROXY, proxy);	
+				ProfilesIni allProfiles = new ProfilesIni();
+				FirefoxProfile Profile = allProfiles.getProfile("default");
+				Profile.setAcceptUntrustedCertificates(true);
+				Profile.setAssumeUntrustedCertificateIssuer(false);
 				dr = new FirefoxDriver(cap);
+				/*
+				ProfilesIni allProfiles = new ProfilesIni();
+				FirefoxProfile Profile = allProfiles.getProfile(“default”);
+				Profile.setAcceptUntrustedCertificates(true);
+				Profile.setAssumeUntrustedCertificateIssuer(false);
+
+				driver = new FirefoxDriver();
+				driver.get(“https://182.72.191.163/CCMLoadBalance/login.aspx”);
+
+				Read more: http://www.abodeqa.com/2013/05/03/ssl-certificate-in-selenium-webdriver-for-chrome-and-firefox-browser/#ixzz3UwfUhlGk
+
+				 */
 			}else if(CONFIG.getProperty("browser").equals("IE")){
 				System.setProperty("webdriver.ie.driver", "C://Users//USER//Downloads//IEDriverServer.exe");
 				dr = new InternetExplorerDriver();

@@ -7,6 +7,7 @@ import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.io.FileUtils;
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.OutputType;
@@ -33,6 +34,7 @@ public class TestUtility extends TestBase {
 		getObjectById("txt_Password").sendKeys(password);
 		getObjectById("txt_OrganizationID").sendKeys(OrgId);
 		getObjectById("btn_Login").click();
+		
 		
 		
 		Thread.sleep(5000l);

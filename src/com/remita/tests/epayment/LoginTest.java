@@ -18,6 +18,8 @@ import org.junit.runners.Parameterized.Parameters;
 
 
 
+import org.openqa.selenium.By;
+
 import tests.TestBase;
 import Util.TestUtility;
 
@@ -45,10 +47,6 @@ public class LoginTest extends TestBase {
 
 		}
 	
-		
-		
-		
-		
 	@Before
 	public void beforeTest() throws IOException{
 		
@@ -68,6 +66,7 @@ public class LoginTest extends TestBase {
 		// selenium code
 		
 		driver.get(CONFIG.getProperty("testSiteName"));
+		//driver.navigate().to("http://162.13.229.242/remita/logonScreen.jsp");
 		
 		ApplicationLogs.debug("Executing the Application Under Test");
 		
@@ -78,6 +77,8 @@ public class LoginTest extends TestBase {
 		
 		ApplicationLogs.debug("Login In...");
 		
+
+			
 		if(isLoggedIn && positiveData.equals("Y")){
 
 			Assert.assertTrue("User is able to login Successfully with Valid credential - "+username+"----"+password, true);

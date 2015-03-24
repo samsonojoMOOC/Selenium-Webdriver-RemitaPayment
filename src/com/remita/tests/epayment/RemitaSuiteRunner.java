@@ -13,7 +13,7 @@ import com.remita.tests.epayment.SmokeTest.PayRRRBillsInvoicesTest;
 import com.remita.tests.epayment.SmokeTest.PayRegisteredBillerTest;
 import com.remita.tests.epayment.SmokeTest.PayTaxesTest;
 import com.remita.tests.epayment.SmokeTest.PayVendorSwift103Test;
-import com.remita.tests.epayment.SmokeTest.PayVendorEcheckTest;
+import com.remita.tests.epayment.SmokeTest.UploadPaymentVendorEchequeTest;
 import com.remita.tests.epayment.SmokeTest.UploadSalariesAllTest;
 import com.remita.tests.epayment.SmokeTest.UploadSalariesPensionTest;
 import com.remita.tests.epayment.SmokeTest.UploadSalariesTaxTest;

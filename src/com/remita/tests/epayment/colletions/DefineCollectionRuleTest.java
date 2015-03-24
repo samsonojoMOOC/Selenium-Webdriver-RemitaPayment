@@ -91,7 +91,7 @@ import Util.TestUtility;
 		
 		@SuppressWarnings("deprecation")
 		@Test
-		public void sendOutInvoicesTest() throws IOException{
+		public void defineCollectionRuleTest() throws IOException{
 			
 								
 			Actions act = new Actions(driver);

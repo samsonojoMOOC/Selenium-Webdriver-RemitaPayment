@@ -69,5 +69,6 @@
 	<classpathentry kind="lib" path="C:/Users/USER/Documents/Remita_JUnit_DataDriven_Framework/lib/xercesImpl-2.11.0.jar"/>
 	<classpathentry kind="lib" path="C:/Users/USER/Documents/Remita_JUnit_DataDriven_Framework/lib/xml-apis-1.4.01.jar"/>
 	<classpathentry kind="lib" path="C:/Users/USER/Documents/Remita_JUnit_DataDriven_Framework/lib/xmlbeans-2.3.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/USER/Documents/Remita_JUnit_DataDriven_Framework/lib/pdfbox-app-1.8.8.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
