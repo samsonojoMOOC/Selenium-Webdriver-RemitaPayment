@@ -29,8 +29,8 @@ public class TestUtility extends TestBase {
 			//return;
 			logout();
 		}
-		getObjectByName("rdo_CorpPersonal").click();
-		getObjectById("txt_UserName").sendKeys(username);
+		//getObjectByName("rdo_CorpPersonal").click();
+		getObjectByXpath("txt_UserName").sendKeys(username);
 		getObjectById("txt_Password").sendKeys(password);
 		getObjectById("txt_OrganizationID").sendKeys(OrgId);
 		getObjectById("btn_Login").click();

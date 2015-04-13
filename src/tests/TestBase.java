@@ -1,8 +1,10 @@
 package tests;
 
+import java.io.File;
 import java.io.FileInputStream;
 //import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
@@ -12,6 +14,7 @@ import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.Proxy;
+import org.openqa.selenium.Proxy.ProxyType;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -65,14 +68,29 @@ public class TestBase {
 		
 			if (CONFIG.getProperty("browser").equals("Firefox")){
 				Proxy proxy = new Proxy();
-				//proxy.setProxyAutoconfigUrl("https://192.9.200.10:3128/");				
+				//proxy.setProxyAutoconfigUrl("https://192.9.200.10:3128/");
+				proxy.setProxyType(ProxyType.MANUAL); //new addition
+				proxy.setHttpProxy("192.9.200.10:3128"); //new addition
+				proxy.setFtpProxy("192.9.200.10:3128"); //new addition
+				proxy.setSslProxy("192.9.200.10:3128"); //new addition
+				proxy.setSocksProxy("192.9.200.10:3128"); // new addition
+				proxy.setNoProxy("192.9.200.11, localhost, 127.0.0.1"); // new addition
 				DesiredCapabilities cap = new DesiredCapabilities();
+				cap.setCapability(CapabilityType.PROXY, proxy); // new addition
+			    cap.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true); // new addition
 				cap.setCapability(CapabilityType.BROWSER_NAME,	"firefox");
 				cap.setCapability(CapabilityType.PROXY, proxy);	
 				ProfilesIni allProfiles = new ProfilesIni();
 				FirefoxProfile Profile = allProfiles.getProfile("default");
-				Profile.setAcceptUntrustedCertificates(true);
-				Profile.setAssumeUntrustedCertificateIssuer(false);
+				//see my addition to what's exiting below:
+				/*
+				Profile.setPreference("browser.download.folderList", 2);
+				Profile.setPreference("browser.download.dir", "C:\\remita_reports");
+				Profile.setPreference("browser.helperApps.neverAsk.saveToDisk", "application/msword, application/pdf, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/x-rar-compressed, application/octet-stream, application/csv, text/csv");
+				*/
+				Profile.setAcceptUntrustedCertificates(true); //new addition
+				Profile.setAssumeUntrustedCertificateIssuer(false); //new addition
+				//WebDriver dr = new FirefoxDriver(Profile);
 				dr = new FirefoxDriver(cap);
 				/*
 				ProfilesIni allProfiles = new ProfilesIni();
@@ -91,12 +109,17 @@ public class TestBase {
 				dr = new InternetExplorerDriver();
 			}else if(CONFIG.getProperty("browser").equals("Chrome")){
 				System.setProperty("webdriver.chrome.driver", "src\\config\\chromedriver.exe");
+				DesiredCapabilities capabilities = DesiredCapabilities.chrome();
+				capabilities.setCapability("chrome.switches", Arrays.asList("--incognito"));
+
 				ChromeOptions options = new ChromeOptions();
-				options.addArguments("no-sandbox");
-				options.setBinary("src\\config\\chromedriver.exe");				
-				dr = new ChromeDriver();
+				options.addArguments("--test-type");
+				capabilities.setCapability("chrome.binary",	"src/ucBrowserDrivers/chromedriver.exe");
+				capabilities.setCapability(ChromeOptions.CAPABILITY, options);
+				dr = new ChromeDriver(capabilities);
+				//driver.navigate().to("javascript:document.getElementById('overridelink').click()"); - this is Certificate Error
 			}else if(CONFIG.getProperty("browser").equals("Headless")){
-				dr  = new HtmlUnitDriver(BrowserVersion.FIREFOX_24);
+				dr  = new HtmlUnitDriver(BrowserVersion.CHROME);
 			}
 			
 			

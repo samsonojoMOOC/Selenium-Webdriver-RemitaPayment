@@ -37,7 +37,7 @@ public class WelcomeTest extends TestBase{
 		
 		
 Actions act = new Actions(driver);
-driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
 WebElement menuPayment = driver.findElement(By.xpath("//*[@id='mainmenu']/li[2]/a"));
 act.moveToElement(menuPayment).click().build().perform();
 

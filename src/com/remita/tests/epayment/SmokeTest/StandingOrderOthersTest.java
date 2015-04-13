@@ -9,6 +9,7 @@ import java.util.concurrent.TimeUnit;
 import junit.framework.Assert;
 
 import org.apache.log4j.Logger;
+import org.junit.After;
 import org.junit.Assume;
 import org.junit.Before;
 import org.junit.Test;
@@ -49,13 +50,20 @@ import Util.TestUtility;
 			public String email;
 			public String phone;
 			public String amount2Pay;
-			//public String confirmAmount2Pay;
+			public String frequency;
+			public String startMonth;
+			public String startYear;
+			public String startMonth1;
+			public String startYr;
 			public String descOfPayment;
 			public String positiveData;
 				
 			// 3rd Step
-			public StandingOrderOthersTest(String selectAccount, String beneficiaryName, String beneficiaryInst, String commercialBank, String beneficiaryAcctNo, 
-					             String email, String phone, String amount2Pay, String descOfPayment, String positiveData ){
+			public StandingOrderOthersTest(String selectAccount, String beneficiaryName, String beneficiaryInst,
+											String commercialBank, String beneficiaryAcctNo, String email, 
+											String phone, String amount2Pay, String frequency, String startMonth,
+											String startYear, String startMonth1, String startYr, 
+											String descOfPayment, String positiveData ){
 				
 				this.selectAccount =selectAccount;
 				this.beneficiaryName =beneficiaryName;
@@ -65,7 +73,11 @@ import Util.TestUtility;
 				this.email = email;
 				this.phone = phone;
 				this.amount2Pay = amount2Pay;
-				//this.confirmAmount2Pay = confirmAmount2Pay;
+				this.frequency = frequency;
+				this.startMonth = startMonth;
+				this.startYear = startYear;
+				this.startMonth1 = startMonth1;
+				this.startYr = startYr;
 				this.descOfPayment = descOfPayment;
 				this.positiveData = positiveData;
 			}
@@ -82,21 +94,30 @@ import Util.TestUtility;
 				Assume.assumeTrue(false);
 		}
 		
+		@After
+		  public void tearDown() throws Exception {
+		    try {
+		      driver.switchTo().defaultContent();
+		    } catch (Exception e) {
+		      e.getMessage();
+		    }
+		  }
+		
 		@SuppressWarnings("deprecation")
 		@Test
-		public void payVendorTest() throws InterruptedException {
+		public void standingOrderOtherTest() throws InterruptedException {
 			
 						
 			Actions act = new Actions(driver);
 			WebElement menuPayment = driver.findElement(By.xpath("//*[@id='mainmenu']/li[5]/a"));
 			act.moveToElement(menuPayment).click().build().perform();
 			
-			ApplicationLogs.debug("Standing Order Module: Moved Mouse on the Main Menu");
+			ApplicationLogs.debug("Standing Order Other Module: Moved Mouse on the Main Menu");
 									
 			WebElement submenuPayment = driver.findElement(By.xpath("//a[text()='Issue Standing Order/Direct Debit ']"));
 			act.moveToElement(submenuPayment).click().perform();
 						
-			ApplicationLogs.debug("Standing Order Module: Moved Mouse on the Sub Menu");		
+			ApplicationLogs.debug("Standing Order Other Module: Moved Mouse on the Sub Menu");		
 			
 			submenuPayment = driver.findElement(By.xpath("//a[text()='Others']"));
 			act.moveToElement(submenuPayment).click().perform();
@@ -113,52 +134,90 @@ import Util.TestUtility;
 			System.out.println("Total input in page - "+ allElement);
 			
 						
-			new Select(driver.findElement(By.id("fromAccount"))).selectByValue(selectAccount);
-			ApplicationLogs.debug("Payment Vendor Module: Selected Account Number");
+			new Select(getObjectByName("drd_StandingOO_Account2PayFrom")).selectByValue(selectAccount);
+			ApplicationLogs.debug("Standing Order Other Module: Selected Account Number");
 			
-			driver.findElement(By.id("surName")).sendKeys(beneficiaryName);
-			ApplicationLogs.debug("Payment Vendor Module: Inputed Beneficiary Name");
+			getObjectByName("txt_StandingOO_BenefitName").sendKeys(beneficiaryName);
+			ApplicationLogs.debug("Standing Order Other Module: Inputed Beneficiary Name");
 			
-			new Select(driver.findElement(By.id("institutionId"))).selectByValue(beneficiaryInst);
-			ApplicationLogs.debug("Payment Vendor Module: Selected Beneficiary Institution");
+			new Select(getObjectByName("drd_StandingOO_BenefitInst")).selectByValue(beneficiaryInst);
+			ApplicationLogs.debug("Standing Order Other Module: Selected Beneficiary Institution");
 			
-			new Select(driver.findElement(By.id("instBank"))).selectByValue(commercialBank);
-			ApplicationLogs.debug("Payment Vendor Module: Selected Commercial Bank");
+			new Select(getObjectByName("drd_StandingOO_CommercialBank")).selectByValue(commercialBank);
+			ApplicationLogs.debug("Standing Order Other Module: Selected Commercial Bank");
 			
-			getObjectById("txt_BeneficiaryAcctNo").sendKeys(beneficiaryAcctNo);
-			ApplicationLogs.debug("Payment Vendor Module: Inputed Beneficiary Acct Number");
+			getObjectByName("txt_StandingOO_BenefitAcctNo").sendKeys(beneficiaryAcctNo);
+			ApplicationLogs.debug("Standing Order Other Module: Inputed Beneficiary Acct Number");
 			
-			getObjectById("txt_Email").sendKeys(email);
-			ApplicationLogs.debug("Payment Vendor Module: Inputed Email");
+			getObjectByName("txt_StandingOO_Email").sendKeys(email);
+			ApplicationLogs.debug("Standing Order Other Module: Inputed Email");
 			
-			getObjectById("txt_Phone").sendKeys(phone);
-			ApplicationLogs.debug("Payment Vendor Module: Inputed Phone");
+			getObjectByName("txt_StandingOO_Phone").sendKeys(phone);
+			ApplicationLogs.debug("Standing Order Other Module: Inputed Phone");
 			
-			getObjectById("txt_Amount2Pay").sendKeys(amount2Pay);
-			ApplicationLogs.debug("Payment Vendor Module: Inputed Amount to Pay");
+			getObjectByName("txt_StandingOO_Amount2Pay").sendKeys(amount2Pay);
+			ApplicationLogs.debug("Standing Order Other Module: Inputed Amount to Pay");
 			
-			getObjectById("txt_PaymentDesc").sendKeys(descOfPayment);
-			ApplicationLogs.debug("Payment Vendor Module: Inputed Payment Description");
+			new Select(getObjectByName("drd_StandingOO_Frequency")).selectByValue(frequency);
+			ApplicationLogs.debug("Standing Order Other Module: Selected the Frequency of Standing Order");
 			
-			getObjectById("btn_Send4Approval").click();
-			ApplicationLogs.debug("Payment Vendor Module: Clicked the Send for Approval button");
+			getObjectByName("txt_StandingOO_StartDate").click();
+			ApplicationLogs.debug("Standing Order Other Module: Clicked the Date");
+			
+			new Select(getObjectByXpath("drd_StandingOO_Month")).selectByValue(startMonth);
+			ApplicationLogs.debug("Standing Order Other Module: Selected Beginning Month");
+			
+			new Select(getObjectByXpath("drd_StandingOO_Year")).selectByValue(startYear);
+			ApplicationLogs.debug("Standing Order Other Module: Selected Beginning Year");
+			
+			getObjectByXpath("lnk_StandingOO_March10").click();
+			ApplicationLogs.debug("Standing Order Other Module: Clicked the Day beginning");
+			
+			getObjectByName("txt_StandingOO_EndDate").click();
+			ApplicationLogs.debug("Standing Order Other Module: Clicked the Date");
+			
+			new Select(getObjectByXpath("drd_StandingOO_Month")).selectByValue(startMonth1);
+			ApplicationLogs.debug("Standing Order Other Module: Selected Beginning Month");
+			
+			new Select(getObjectByXpath("drd_StandingOO_Year")).selectByValue(startYr);
+			ApplicationLogs.debug("Standing Order Other Module: Selected Beginning Year");
+			
+			getObjectByXpath("lnk_StandingOO_March9").click();
+			ApplicationLogs.debug("Standing Order Other Module: Clicked the Day ending");
+			
+			getObjectByName("txt_StandingOO_PaymentDesc").sendKeys(descOfPayment);
+			ApplicationLogs.debug("Standing Order Other Module: Inputed Payment Description");
+			
+			new Select(getObjectByName("drd_StandingOO_Frequency")).selectByValue(frequency);
+			ApplicationLogs.debug("Standing Order Other Module: Selected the Frequency of Standing Order");
+			
+			getObjectById("btn_StanidngOO_Send4Approval").click();
+			ApplicationLogs.debug("Standing Order Other Module: Clicked the Send for Approval button");
+			
+			//Validate that there is response
+			
+			String actualText = getObjectByXpath("val_ForwardApproval").getText(); 
+			System.out.println(actualText);
+			Assert.assertTrue("Standing Order has not been successfully forwarded for Approval", actualText.startsWith("STANDING ORDER/DIRECT DEBIT (Batch"));
+			ApplicationLogs.debug("Standing Order Other Module: Standing Order has been sent successfully for Approval");
+			
 			
 			driver.switchTo().defaultContent();
-			ApplicationLogs.debug("Payment Vendor Module: Switched back to the default Content");
+			ApplicationLogs.debug("Standing Order Other Module: Switched back to the default Content");
 			
 	
 			if(positiveData.equals("Y")){
 				// let's report error
 				//TestUtility.takeScreenShot("Pay Vendor Test");
-				System.out.println("Payment to Vendor Transaction(s) was successfully carried out");
-				Assert.assertTrue("Payment to Vendor Transaction(s) was successfully carried out", true);
-				ApplicationLogs.debug("Payment Vendor Module: Payment to Vendor Transaction(s) was successfully carried out");
+				System.out.println("Standing Order Transaction(s) was successfully carried out");
+				Assert.assertTrue("Standing Order Transaction(s) was successfully carried out", true);
+				ApplicationLogs.debug("Standing Order Other Module: Payment to Vendor Transaction(s) was successfully carried out");
 			}else if(positiveData.equals("N")){
 				// report error - able to login with wrong credential
 				TestUtility.takeScreenShot("Pay Vendor Test");
-				System.out.println("Payment to Vendor Transaction(s) was unsuccessfully carried out");
-				Assert.assertTrue("Payment to Vendor Transaction(s) was unsuccessfully carried out", false);
-				ApplicationLogs.debug("Payment Vendor Module: Payment to Vendor Transaction(s) was unsuccessfully carried out");
+				System.out.println("Standing Order Transaction(s) was unsuccessfully carried out");
+				Assert.assertTrue("Standing Order Transaction(s) was unsuccessfully carried out", false);
+				ApplicationLogs.debug("Standing Order Other Module: Payment to Vendor Transaction(s) was unsuccessfully carried out");
 			}
 
 		}

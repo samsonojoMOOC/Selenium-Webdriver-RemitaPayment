@@ -3,6 +3,7 @@ package com.remita.tests.epayment.SmokeTest;
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
+import org.junit.After;
 import org.junit.Assert;
 import org.junit.Assume;
 import org.junit.Before;
@@ -29,6 +30,15 @@ public class ReportAllPaymentMadeHTMLTest extends TestBase{
 		if(TestUtility.isSkip("ReportAllPaymentMadeHTMLTest"))
 			Assume.assumeTrue(false);
 	}
+	
+	@After
+	  public void tearDown() throws Exception {
+	    try {
+	      driver.switchTo().defaultContent();
+	    } catch (Exception e) {
+	      e.getMessage();
+	    }
+	  }
 	
 	
 	@Test

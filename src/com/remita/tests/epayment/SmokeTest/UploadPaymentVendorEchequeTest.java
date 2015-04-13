@@ -81,7 +81,7 @@ import Util.TestUtility;
 			
 								
 			Actions act = new Actions(driver);
-			driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+			driver.manage().timeouts().implicitlyWait(100, TimeUnit.SECONDS);
 			WebElement menuPayment = driver.findElement(By.xpath("//*[@id='mainmenu']/li[5]/a"));
 			act.moveToElement(menuPayment).click().build().perform();
 			ApplicationLogs.debug("Pay Vendor eCheck Module: Moved to the Main Menu");
@@ -90,8 +90,10 @@ import Util.TestUtility;
 			act.moveToElement(submenuPayment).click().perform();
 			ApplicationLogs.debug("Pay Vendor eCheck Module: Clicked the Sub Menu");
 			
+			/*
 			int size = driver.findElements(By.tagName("iframe")).size();
 			System.out.println("Total frames in page- "+size);
+			*/
 			
 			driver.switchTo().frame(0);
 			int allElement = driver.findElements(By.tagName("input")).size();
@@ -99,14 +101,14 @@ import Util.TestUtility;
 			
 			getObjectById("rdo_BulkUpload").click();
 			ApplicationLogs.debug("Pay Vendor eCheck Module: Clicked Bulk Upload Radio Button");
-			
+			/*
 			System.out.println("***************2nd Chechk**********");
 			size = driver.findElements(By.tagName("iframe")).size();
 			System.out.println("Total frames in page- "+size);
 			
 			allElement = driver.findElements(By.tagName("input")).size();
 			System.out.println("Total input in page - "+ allElement);
-
+			*/
 			
 			new Select(getObjectById("drd_SelectUploadType")).selectByValue(UploadType);
 			ApplicationLogs.debug("Pay Vendor eCheck Module: Selected the Upload Type from drop down");
@@ -118,9 +120,9 @@ import Util.TestUtility;
 								"C:\\Users\\USER\\Documents\\normalechequeupload01.csv", "Open").start();
 			ApplicationLogs.debug("Pay Vendor eCheck Module: Attached the eCheck CVS file");
 
-
-			Alert alert = driver.switchTo().alert();
-			alert.accept();
+			if(isAlertPresent()){
+			driver.switchTo().alert().accept();
+			}
 			
 			
 			getObjectByName("btn_Preview").click();
@@ -131,14 +133,14 @@ import Util.TestUtility;
 			getObjectByName("btn_Submit").click();
 			ApplicationLogs.debug("Pay Vendor eCheck Module: Clicked the Submit Button");
 			
-			//wait for the Choose Paying Account
+			/*wait for the Choose Paying Account
 			System.out.println("***************3nd Chechk**********");
 			size = driver.findElements(By.tagName("iframe")).size();
 			System.out.println("Total frames in page- "+size);
 			
 			allElement = driver.findElements(By.tagName("input")).size();
 			System.out.println("Total input in page - "+ allElement);
-
+			*/
 
 /*			new FluentWait<WebDriver>(driver)
 		       .withTimeout(120, TimeUnit.SECONDS)

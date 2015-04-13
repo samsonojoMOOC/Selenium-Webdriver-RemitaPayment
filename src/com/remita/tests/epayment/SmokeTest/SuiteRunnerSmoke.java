@@ -10,18 +10,8 @@ import org.junit.runners.Suite.SuiteClasses;
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.remote.DesiredCapabilities;
 
 import com.remita.tests.epayment.LoginApprovalTest;
 import com.remita.tests.epayment.LoginBankApprovalTest;
@@ -50,79 +40,27 @@ import com.remita.tests.epayment.colletions.SendOutInvoicesTest;
 @RunWith(Suite.class)
 @SuiteClasses({
 
-	LoginTellerApprovalTest.class,
-	PaySalaryViaRRRApprovalTest.class,
-
-
-/*
-//LoginBankApprovalTest.class,
-//ReverseWrongTransApprovalTest.class,
-//LoginBankTest.class,
-//ReverseWrongTransactionTest.class,
-
-/*
 LoginTest.class,
-LoginApprovalTest.class,
-RejectPaymentApprovalTest.class,
-MassApprovalPaymentTest.class,
-MassRejectPaymentApprovalTest.class,
-
-
-
+//WelcomeTest.class,
+//UploadPaymentVendorEchequeTest.class,
+DefineCollectionRuleTest.class,
 //UserSetupTest.class,
 //UserSetupUpdateTest.class,
-//LoginApprovalTest.class,
-//UserSetupApprovalTest.class,
-
-//PaymentReceivedReportHTMLTest.class,
-//ReportAllPaymentMadeHTMLTest.class,
-//PayPensionTest.class,
-
-/*
-LoginApprovalTest.class,
-RejectPaymentApprovalTest.class,
-MassApprovalPaymentTest.class,
-MassRejectPaymentApprovalTest.class,
-LoginPayrollTest.class,
-ManageStaffRecordTest.class,
 
 
-
-//Bank Teller Payment via RRR
-LoginTellerTest.class,
-PaySalaryViaRRRTest.class,
-LoginTellerApprovalTest.class,
-PaySalaryViaRRRApprovalTest.class,
-
-
-LoginBankTest.class,
-BankBranchSetupTest.class,
-LoginBankApprovalTest.class,
-BankBranchSetupApprovalTest.class,
-
-LoginBankTest.class,
-BankBranchSetupTest.class,
-LoginBankApprovalTest.class,
-ReverseWrongTransApprovalTest.class,
-ReverseWrongTransactionTest.class,
-LoginApprovalTest.class,
-StandingOrderApprovalTest.class,
-
-	
-
-LoginTest.class,
-WelcomeTest.class,
+/* WelcomeTest.class,
 DefineCollectionRuleTest.class,
+
 EditCollectionRuleTest.class,
 SendOutInvoicesTest.class,
 SendOutInvoiceUploadTest.class,
 ResendUnpaidInvoiceTest.class,
+
 UploadPaymentVendorEchequeTest.class,
 PayVendorSwift103Test.class,
 PayVendorSingleTest.class,
 PayRegisteredBillerTest.class,
 PayRRRBillsInvoicesTest.class,
-
 ContractPaymentUploadTest.class,
 UploadSalariesTest.class,
 UploadSalariesAllTest.class,
@@ -133,17 +71,23 @@ PayTaxesTest.class,
 StandingOrderDDDTest.class,
 StandingOrderDateTest.class,
 StandingOrderOthersTest.class,
+PaymentReceivedReportHTMLTest.class,
+ReportAllPaymentMadeHTMLTest.class,
+UserSetupTest.class,
+UserSetupUpdateTest.class,
 
+UploadPaymentVendorEchequeTest.class,
 */
-//LogoutTest.class
+LogoutTest.class
 
 })
 
-public class SmokeSuiteRunner {
+public class SuiteRunnerSmoke {
 	
 	@BeforeClass
 	public static void setUp() throws SQLException {
 		System.out.println("*************Setting up database********************");
+		
 		/*
 		Connection conn = null;
 		String url = "jdbc:mysql://localhost:3306/";

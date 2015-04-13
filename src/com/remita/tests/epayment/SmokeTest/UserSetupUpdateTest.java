@@ -8,6 +8,7 @@ import java.util.concurrent.TimeUnit;
 import junit.framework.Assert;
 
 import org.apache.log4j.Logger;
+import org.junit.After;
 import org.junit.Assume;
 import org.junit.Before;
 import org.junit.Test;
@@ -64,6 +65,15 @@ import Util.TestUtility;
 			if(TestUtility.isSkip("UserSetupUpdateTest"))
 				Assume.assumeTrue(false);
 		}
+		
+		@After
+		  public void tearDown() throws Exception {
+		    try {
+		      driver.switchTo().defaultContent();
+		    } catch (Exception e) {
+		      e.getMessage();
+		    }
+		  }
 		
 		@SuppressWarnings("deprecation")
 		@Test

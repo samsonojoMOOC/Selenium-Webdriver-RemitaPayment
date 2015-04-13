@@ -142,20 +142,7 @@ import Util.TestUtility;
 			getObjectById("btn_Send4Approval").click();
 			
 			driver.switchTo().defaultContent();
-			
-			//Assert.assertEquals(message, expected, actual);
-			//Assert.assertEquals(expected, actual);
-			
-			//End of first Iteration
-			
-
-			/* Enter PIN
-			  WebElement confirmPin = getObjectById("confirmPin");
-			  ((JavascriptExecutor)driver).executeScript("arguments[0].removeAttribute('readonly', 'readonly')",confirmPin);
-			  confirmPin.sendKeys("4321");
-			  getObjectClassName("go").click();
-			  */
-			  
+						  
 			if(positiveData.equals("Y")){
 				// let's report error
 				//TestUtility.takeScreenShot("Pay Vendor Test");

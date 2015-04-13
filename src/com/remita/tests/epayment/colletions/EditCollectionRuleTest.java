@@ -121,8 +121,8 @@ import Util.TestUtility;
 			.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id='mainContentArea']/div[2]/div[1]/iframe/html/body/div[2]/label/input[@id='standOrderRadioId']")));
 			
 			*/
-			driver.findElement(By.xpath("//*[@id='form1']/div[17]/div[2]/table/tbody/tr[2]/td[2]/font")).click();
-			                             //*[@id='form1']/div[17]/div[2]/table/tbody/tr[2]/td[2]/font
+			driver.findElement(By.xpath("//*[@id='form1']/div[17]/div[2]/table/tbody/tr[2]/td[2]")).click();
+			                             //*[@id='form1']/div[16]/div[2]/table/tbody/tr[2]/td[2]
 			
 			getObjectByName("txt_CollectRule_ServiceName").clear();
 			getObjectByName("txt_CollectRule_ServiceName").sendKeys(serviceName);

@@ -63,7 +63,7 @@ driver.findElement(By.name("newWinn")).click();
 
 
 
-	
+	/*
 	URL TestURL = new URL("http://192.9.200.11/report/jreports/exportjreport?[starts-with(@_params, '*')]");
 
 	BufferedInputStream TestFile = new BufferedInputStream(TestURL.openStream());
@@ -72,7 +72,7 @@ driver.findElement(By.name("newWinn")).click();
 	String TestText = new PDFTextStripper().getText(TestPDF.getPDDocument());
 	
 	Assert.assertTrue("The PDF Document does not contain PDF Report", TestText.contains("Payments Received Report"));
-
+*/
 
 	
 
