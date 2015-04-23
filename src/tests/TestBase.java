@@ -67,8 +67,10 @@ public class TestBase {
 		// Initializing the WebDriver and EventFiringWebDriver
 		
 			if (CONFIG.getProperty("browser").equals("Firefox")){
+				
 				Proxy proxy = new Proxy();
-				//proxy.setProxyAutoconfigUrl("https://192.9.200.10:3128/");
+				proxy.setProxyAutoconfigUrl("https://192.9.200.10:3128/");
+				/*
 				proxy.setProxyType(ProxyType.MANUAL); //new addition
 				proxy.setHttpProxy("192.9.200.10:3128"); //new addition
 				proxy.setFtpProxy("192.9.200.10:3128"); //new addition
@@ -83,15 +85,17 @@ public class TestBase {
 				ProfilesIni allProfiles = new ProfilesIni();
 				FirefoxProfile Profile = allProfiles.getProfile("default");
 				//see my addition to what's exiting below:
-				/*
+				
 				Profile.setPreference("browser.download.folderList", 2);
 				Profile.setPreference("browser.download.dir", "C:\\remita_reports");
 				Profile.setPreference("browser.helperApps.neverAsk.saveToDisk", "application/msword, application/pdf, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/x-rar-compressed, application/octet-stream, application/csv, text/csv");
-				*/
+				
 				Profile.setAcceptUntrustedCertificates(true); //new addition
 				Profile.setAssumeUntrustedCertificateIssuer(false); //new addition
 				//WebDriver dr = new FirefoxDriver(Profile);
 				dr = new FirefoxDriver(cap);
+				*/
+				dr = new FirefoxDriver();
 				/*
 				ProfilesIni allProfiles = new ProfilesIni();
 				FirefoxProfile Profile = allProfiles.getProfile(“default”);
@@ -114,12 +118,12 @@ public class TestBase {
 
 				ChromeOptions options = new ChromeOptions();
 				options.addArguments("--test-type");
-				capabilities.setCapability("chrome.binary",	"src/ucBrowserDrivers/chromedriver.exe");
+				capabilities.setCapability("chrome.binary",	"src\\config\\chromedriver.exe");
 				capabilities.setCapability(ChromeOptions.CAPABILITY, options);
 				dr = new ChromeDriver(capabilities);
-				//driver.navigate().to("javascript:document.getElementById('overridelink').click()"); - this is Certificate Error
+				//driver.navigate().to("javascript:document.getElementById('overridelink').click()"); - this takes care of Certificate Error
 			}else if(CONFIG.getProperty("browser").equals("Headless")){
-				dr  = new HtmlUnitDriver(BrowserVersion.CHROME);
+				dr  = new HtmlUnitDriver(BrowserVersion.FIREFOX_24);
 			}
 			
 			

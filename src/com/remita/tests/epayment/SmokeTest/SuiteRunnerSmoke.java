@@ -16,7 +16,6 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 import com.remita.tests.epayment.LoginApprovalTest;
 import com.remita.tests.epayment.LoginBankApprovalTest;
 import com.remita.tests.epayment.LoginBankTest;
-import com.remita.tests.epayment.LoginPayrollTest;
 import com.remita.tests.epayment.LoginTellerApprovalTest;
 import com.remita.tests.epayment.LoginTellerTest;
 import com.remita.tests.epayment.LoginTest;
@@ -29,6 +28,7 @@ import com.remita.tests.epayment.RejectPaymentApprovalTest;
 import com.remita.tests.epayment.WelcomeTest;
 import com.remita.tests.epayment.BankBranchOps.PaySalaryViaRRRApprovalTest;
 import com.remita.tests.epayment.BankBranchOps.PaySalaryViaRRRTest;
+import com.remita.tests.epayment.Payroll.LoginPayrollTest;
 import com.remita.tests.epayment.colletions.DefineCollectionRuleTest;
 import com.remita.tests.epayment.colletions.EditCollectionRuleTest;
 import com.remita.tests.epayment.colletions.ResendUnpaidInvoiceTest;
@@ -41,9 +41,10 @@ import com.remita.tests.epayment.colletions.SendOutInvoicesTest;
 @SuiteClasses({
 
 LoginTest.class,
-//WelcomeTest.class,
-//UploadPaymentVendorEchequeTest.class,
+PayVendorSwift103Test.class,
+UploadSalariesTest.class,
 DefineCollectionRuleTest.class,
+//UploadSalariesAllTest.class,
 //UserSetupTest.class,
 //UserSetupUpdateTest.class,
 
@@ -68,6 +69,7 @@ UploadSalariesPensionTest.class,
 //UploadSalariesTaxTest.class, KIV - not worked today
 //PayPensionTest.class,
 PayTaxesTest.class,
+PayNHFTest.class,
 StandingOrderDDDTest.class,
 StandingOrderDateTest.class,
 StandingOrderOthersTest.class,

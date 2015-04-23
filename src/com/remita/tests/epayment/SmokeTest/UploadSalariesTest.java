@@ -80,11 +80,12 @@ import Util.TestUtility;
 		@Test
 		public void uploadSalariesTest() throws IOException, InterruptedException{
 			
-								
+
 			driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 			Actions act = new Actions(driver);
 			
 			WebElement menuPayment = driver.findElement(By.xpath("//*[@id='mainmenu']/li[5]/a"));
+
 			act.moveToElement(menuPayment).click().build().perform();
 			
 			ApplicationLogs.debug("Upload Salaries Module: Moved mouse to the Main Menu Link");
@@ -118,10 +119,9 @@ import Util.TestUtility;
 								"C:\\Users\\USER\\Documents\\uploadfolder\\SalaryOnly_100.csv", "Open").start();
 			ApplicationLogs.debug("Upload Salaries Module: Selected and Attached the Salaries CSV File");
 			
-			Alert alert = driver.switchTo().alert();
-			System.out.println(alert.getText());
-			
-			alert.accept();
+			if(isAlertPresent()){
+				driver.switchTo().alert().accept();
+			}
 	
 			getObjectById("txt_BriefDesc").sendKeys(briefDesc);
 			ApplicationLogs.debug("Upload Salaries Module: Inserted Brief Description");
